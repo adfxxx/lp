@@ -298,7 +298,7 @@ sum2(List, S) :- sum_2(List, 0, S).
 *`print_grade_2_group` - печать номера группы и количества несдавших студентов. Получаем количество несдавших студентов, печатаем номер группы и полученное количество.
 
 Реализация:
-
+```prolog
 % Получить таблицу групп и средний балл по каждой из групп
 
 sum([], 0).
@@ -314,15 +314,15 @@ sr_student(Student, Sr) :- findall(X, grades(Student, X), List), sr(List, Sr).
 sr_student_group(Group, Sr) :- group(Group, Students), member(Student, Students), sr_student(Student, Sr).
 
 sr_groups :- group(Group, _), findall(X, sr_student_group(Group, X), List), sr(List, N), write('Group '), write(Group), write(', average grade: '), write(N), write('\n'), fail.
-
-
+```
+```prolog
 % Для каждого предмета получить список студентов, не сдавших экзамен (grade=2)
 
 grade_2(Sub, Student) :- subject(Sub, Students), member(grade(Student, 2), Students).
 
 print_grade_2 :- subject(Sub, _), findall(Student, grade_2(Sub, Student), List), write('Subject: '), write(Sub), write(' Did not pass: '), write(List), write('\n'), fail.
-
-
+```
+```prolog
 % Найти количество не сдавших студентов в каждой из групп
 
 grade_2_group(Group, Student) :- subject(_,X), group(Group,Y), member(Student,Y),member(grade(Student,2),X).
@@ -330,16 +330,17 @@ grade_2_group(Group, Student) :- subject(_,X), group(Group,Y), member(Student,Y)
 sum_in_group(Group,Sum) :- findall(Student, grade_2_group(Group, Student), List), length(List, Sum).
 
 print_grade_2_group :- group(Group, _), sum_in_group(Group, Sum), write(Group), write(' Number:  '), write(Sum), write('\n'), fail.
-
+```
 
 Пример использования:
+```prolog
 ?- sr_groups.
 Group 102, average grade: 3.9444444444444446
 Group 101, average grade: 3.9666666666666672
 Group 104, average grade: 3.8611111111111112
 Group 103, average grade: 4.1458333333333339
-
-
+```
+```prolog
 ?- print_grade_2.
 Subject: Логическое программирование Did not pass: [Петровский ,Сидоров,Джаво]
 Subject: Математический анализ Did not pass: [Петров]
@@ -347,14 +348,14 @@ Subject: Функциональное программирование Did not p
 Subject: Информатика Did not pass: [Сиплюсплюсов,Криптовалютников]
 Subject: Английский язык Did not pass: [Решетников,Азурин]
 Subject: Психология Did not pass: [Безумников,Круглосчиталкин]
-
-
+```
+```prolog
 ?- print_grade_2_group.
 102 Number:  3
 101 Number:  3
 104 Number:  2
 103 Number:  2
-
+```
 
 ## Выводы
 В данной лабораторной работе я ознакомилась с языком программирования Prolog. Данный язык программирования стал новым опытом для меня, так как он отличается от тех, на которых я раньше решала различные задачи. Основная сложность, возникшая в процессе работы, это непривычная среда программирования и неприывчный способ написания кода. Сложность нахождения ошибок при написании кода также являлось проблемой для меня. Однако написание самих команд стало интересным и необычным опытом, так как необходимо было "научить" программу действовать определенным образом. Также стоит отметить такую важную структуру как списки, потому что в ходе выполнения работы она задействовалась ни один раз. Так, в ходе выполнения второй части задания я использовала списки для вывода данных.
